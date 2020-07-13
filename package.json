@@ -1,0 +1,23 @@
+{
+  "name": "bbsc",
+  "version": "1.0.0",
+  "description": "Bay Barley & Spud Club",
+  "main": "bbsc.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "http-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rdsimes/bbsc.git"
+  },
+  "author": "Richard Simes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rdsimes/bbsc/issues"
+  },
+  "homepage": "https://github.com/rdsimes/bbsc#readme",
+  "devDependencies": {
+    "http-server": "^0.12.3"
+  }
+}
