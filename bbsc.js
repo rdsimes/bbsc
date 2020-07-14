@@ -12,7 +12,7 @@ function renderEvent(element, event)
     const dateTimeFormat = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'short', day: '2-digit' }) 
     const [{ value: month },,{ value: day },,{ value: year }] = dateTimeFormat .formatToParts(event.date); 
 
-    element.html(`${day}-${month}-${year}  @ ${event.host}`);
+    element.html(`<strong>${day}-${month}-${year}  @ ${event.host}</strong><span>${event.comment}</span>`);
 }
 
 fetch(dataUri)
@@ -57,4 +57,5 @@ $('.nav-link').click(l => {
     $(page).hide();
     $(l.target.hash).show();
     page = l.target.hash;
+    $('#navbarsExampleDefault').removeClass('show');
 });
