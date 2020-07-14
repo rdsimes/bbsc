@@ -57,4 +57,5 @@ $('.nav-link').click(l => {
     $(page).hide();
     $(l.target.hash).show();
     page = l.target.hash;
+    $('#navbarsExampleDefault').removeClass('show');
 });
