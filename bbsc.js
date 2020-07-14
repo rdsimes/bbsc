@@ -1,10 +1,18 @@
 var dataUri = 'https://spreadsheets.google.com/feeds/cells/1IZymUvElVyn4mepHHDWK5VlY_xvC3UVfPOcfb-ohOtE/1/public/full?alt=json'
 //dataUri = 'full.json';
 
-
-function getColumn(data, col){
+function getColumn(data, col)
+{
  return data.feed.entry.filter(e => e.gs$cell.col === col && e.gs$cell.row != "1")
  .map(e => e.content.$t);
+}
+
+function renderEvent(element, event)
+{
+    const dateTimeFormat = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'short', day: '2-digit' }) 
+    const [{ value: month },,{ value: day },,{ value: year }] = dateTimeFormat .formatToParts(event.date); 
+
+    element.html(`${day}-${month}-${year}  @ ${event.host}`);
 }
 
 fetch(dataUri)
@@ -12,6 +20,7 @@ fetch(dataUri)
 .then(data => {
     var table =  $('#Whiskies tbody');
     var nextEvent = $('#next-event-data');
+    var pastEvents = $('#past-events ul');
     var names = getColumn(data, "1");
     var dates = getColumn(data, "2");
     
@@ -27,15 +36,25 @@ fetch(dataUri)
     var next = events.filter(e => e.date > now)[0];
     var past =  events.filter(e => e.date < now)
     if (next) {
-        const dateTimeFormat = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'short', day: '2-digit' }) 
-        const [{ value: month },,{ value: day },,{ value: year }] = dateTimeFormat .formatToParts(next.date); 
-
-        nextEvent.html(`${day}-${month}-${year}  @ ${next.host}`);
+        renderEvent(nextEvent, next);
     }
+
+    past.forEach(p => {
+        var li = document.createElement('li');
+        renderEvent($(li), p);
+        pastEvents.append(li);
+    });
     whiskies.forEach(w => {
         table.append('<tr><td>' + w.date + '</td><td>' +  w.name + '</td></tr>')  
     });
     
     window.data = events;
    
+});
+
+var page = '#next-event';
+$('.nav-link').click(l => {
+    $(page).hide();
+    $(l.target.hash).show();
+    page = l.target.hash;
 });
