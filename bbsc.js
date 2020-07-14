@@ -12,7 +12,7 @@ function renderEvent(element, event)
     const dateTimeFormat = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'short', day: '2-digit' }) 
     const [{ value: month },,{ value: day },,{ value: year }] = dateTimeFormat .formatToParts(event.date); 
 
-    element.html(`<strong>${day}-${month}-${year}  @ ${event.host}</strong><span>${event.comment}</span>`);
+    element.html(`<strong>${day}-${month}-${year}  @ ${event.host}</strong>&nbsp;<span>${event.comment}</span>`);
 }
 
 fetch(dataUri)
