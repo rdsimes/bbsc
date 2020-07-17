@@ -7,12 +7,28 @@ function getColumn(data, col)
  .map(e => e.content.$t);
 }
 
+function sort(array, field, asc){
+    array.sort((a, b) => {
+        if (a[field] < b[field]){
+            return asc ? -1 : 1;
+        }
+        if (a[field] > b[field]){
+            return asc ? 1 : -1;
+        }
+        return 0;
+    });
+}
+
+function renderDate(date){
+    const dateTimeFormat = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'short', day: '2-digit' }) 
+    const [{ value: month },,{ value: day },,{ value: year }] = dateTimeFormat .formatToParts(date); 
+    return `${day}-${month}-${year}`;
+}
+
 function renderEvent(element, event)
 {
-    const dateTimeFormat = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'short', day: '2-digit' }) 
-    const [{ value: month },,{ value: day },,{ value: year }] = dateTimeFormat .formatToParts(event.date); 
-
-    element.html(`<strong>${day}-${month}-${year}  @ ${event.host}</strong>&nbsp;<span>${event.comment}</span>`);
+    const date = renderDate(event.date);
+    element.html(`<strong>${date}  @ ${event.host}</strong>&nbsp;<span>${event.comment}</span>`);
 }
 
 fetch(dataUri)
@@ -30,7 +46,7 @@ fetch(dataUri)
     
 
 
-    var whiskies = names.map((n, i) => ({name: n, date: dates[i]}));
+    var whiskies = names.map((n, i) => ({name: n, date: Date.parse(dates[i])}));
     var events = eventHosts.map((h, i) => ({host: h, date: Date.parse(eventDates[i]), comment: eventComments[i]}));
     var now = new Date();
     var next = events.filter(e => e.date > now)[0];
@@ -44,8 +60,26 @@ fetch(dataUri)
         renderEvent($(li), p);
         pastEvents.append(li);
     });
-    whiskies.forEach(w => {
-        table.append('<tr><td>' + w.date + '</td><td>' +  w.name + '</td></tr>')  
+
+    var renderWhiskyList = function(byName, asc){
+        table.html('');
+        if (byName) {
+            sort(whiskies, 'name', asc);
+        } else {
+            sort(whiskies, 'date', asc);
+        }
+        whiskies.forEach(w => {
+            table.append('<tr><td>' + renderDate(w.date) + '</td><td>' +  w.name + '</td></tr>')  
+        });
+       
+    };
+
+    renderWhiskyList(false, true);
+
+    $('.toggle-sort').click((e) => {
+
+        renderWhiskyList(e.target.id == "sort-name", $(e.target).hasClass('asc'));
+        $(e.target).toggleClass('asc');
     });
     
     window.data = events;

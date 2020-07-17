@@ -4,7 +4,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
     integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
@@ -86,8 +86,8 @@
       <table class="table" id="Whiskies">
         <thead>
           <tr>
-            <th scope="col">Date</th>
-            <th scope="col">Name</th>
+            <th scope="col"><a id = "sort-date" class = "toggle-sort asc" href="#"><i class="fa fa-fw fa-sort"></i> Date</a></th>
+            <th scope="col"><a id = "sort-name" class = "toggle-sort asc" href="#"><i class="fa fa-fw fa-sort"></i> Name </a></th>
           </tr>
         </thead>
         <tbody>
@@ -101,10 +101,6 @@
 
 
     </div>
-
-
-
-
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
