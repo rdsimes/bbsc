@@ -1,5 +1,8 @@
 {
  "name": "BBSC",
+ "start_url": "https://rdsimes.github.io/bbsc/",
+ "display": "fullscreen",
+ "prefer_related_applications": false,
  "icons": [
   {
    "src": "\/bbsc\/android-icon-36x36.png",
