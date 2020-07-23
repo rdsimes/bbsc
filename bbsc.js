@@ -1,5 +1,8 @@
 var dataUri = 'https://spreadsheets.google.com/feeds/cells/1IZymUvElVyn4mepHHDWK5VlY_xvC3UVfPOcfb-ohOtE/1/public/full?alt=json'
 //dataUri = 'full.json';
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('service-worker.js');
+  }
 
 function getColumn(data, col)
 {
