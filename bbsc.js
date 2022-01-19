@@ -42,7 +42,7 @@ fetch(dataUri)
     
 
 
-    var whiskies = data.map((n, i) => ({name: n.whisky, date: Date.parse(n.date)}));
+    var whiskies = data.slice(1).map((n, i) => ({name: n.whisky, date: Date.parse(n.date)}));
     var events = [] //eventHosts.map((h, i) => ({host: h, date: Date.parse(eventDates[i]), comment: eventComments[i]}));
     var now = new Date();
     var next = events.filter(e => e.date > now)[0];
