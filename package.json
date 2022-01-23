@@ -18,6 +18,6 @@
   },
   "homepage": "https://github.com/rdsimes/bbsc#readme",
   "devDependencies": {
-    "http-server": "^0.12.3"
+    "http-server": "^14.1.0"
   }
 }
