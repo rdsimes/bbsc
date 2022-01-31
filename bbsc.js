@@ -39,11 +39,11 @@ fetch(dataUri)
     // var eventHosts = getColumn(data, "4");
     // var eventDates = getColumn(data, "5");
     // var eventComments = getColumn(data, "6");
-    
+    console.log(data);
 
 
-    var whiskies = data.slice(1).map((n, i) => ({name: n.whisky, date: Date.parse(n.date)}));
-    var events = [] //eventHosts.map((h, i) => ({host: h, date: Date.parse(eventDates[i]), comment: eventComments[i]}));
+    var whiskies = data.Whisky.map((n, i) => ({name: n.Summary, date: Date.parse(n.Date)}));
+    var events = data.Events.map((h, i) => ({host: h.Host, date: Date.parse(h.Date), comment: h.Comment}));
     var now = new Date();
     var next = events.filter(e => e.date > now)[0];
     var past =  events.filter(e => e.date < now)
