@@ -42,8 +42,8 @@ fetch(dataUri)
     console.log(data);
 
 
-    var whiskies = data.Whisky.map((n, i) => ({name: n.Summary, date: Date.parse(n.Date)}));
-    var events = data.Events.map((h, i) => ({host: h.Host, date: Date.parse(h.Date), comment: h.Comment}));
+    var whiskies = data.whisky.map((n, i) => ({name: n.summary, date: Date.parse(n.date)}));
+    var events = data.events.map((h, i) => ({host: h.host, date: Date.parse(h.date), comment: h.comment}));
     var now = new Date();
     var next = events.filter(e => e.date > now)[0];
     var past =  events.filter(e => e.date < now)
