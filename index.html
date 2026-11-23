@@ -51,14 +51,14 @@
 
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#next-event">Home <span class="sr-only">(current)</span></a>
+        <li class="nav-item">
+          <a class="nav-link" href="#next-event">Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#past-events">Past events</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#whisky-list">Whisky list</a>
+        <li class="nav-item active">
+          <a class="nav-link" href="#whisky-list">Whisky list <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#photos">Photos</a>
@@ -69,7 +69,7 @@
 
 
   <main role="main" class="container">
-    <div id="next-event">
+    <div id="next-event" class="hide">
       <div class="center"><img src="logo-large.png" width="200">
       </div>
       <h2>Next event</h2>
@@ -81,8 +81,9 @@
 
         </ul>
     </div>
-    <div id="whisky-list" class="hide">
+    <div id="whisky-list">
       <h2>Whiskies</h2>
+      <input type="search" id="whisky-search" class="form-control mb-3" placeholder="Search whiskies..." aria-label="Search whiskies">
       <table class="table" id="Whiskies">
         <thead>
           <tr>
@@ -115,7 +116,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
       integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
       crossorigin="anonymous"></script>
-    <script src="bbsc.js?q=124"></script>
+    <script src="bbsc.js?q=125"></script>
 </body>
 
 </html>

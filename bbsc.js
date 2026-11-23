@@ -106,25 +106,32 @@ Promise.all([readSheet('Whisky'), readSheet('Events')])
         pastEvents.append(li);
     });
 
-    var renderWhiskyList = function(byName, asc){
+    var search = $('#whisky-search');
+
+    var drawWhiskies = function(){
         table.html('');
-        if (byName) {
-            sort(whiskies, 'name', asc);
-        } else {
-            sort(whiskies, 'date', asc);
-        }
-        whiskies.forEach(w => {
-            table.append('<tr><td>' + renderDate(w.date) + '</td><td>' +  escapeHtml(w.name) + '</td></tr>')  
-        });
-       
+        var terms = search.val().toLowerCase().split(/\s+/).filter(Boolean);
+        whiskies
+            .filter(w => terms.every(t => w.name.toLowerCase().includes(t)))
+            .forEach(w => {
+                table.append('<tr><td>' + renderDate(w.date) + '</td><td>' +  escapeHtml(w.name) + '</td></tr>')  
+            });
     };
 
-    renderWhiskyList(false, true);
+    var renderWhiskyList = function(byName, asc){
+        sort(whiskies, byName ? 'name' : 'date', asc);
+        drawWhiskies();
+    };
+
+    renderWhiskyList(false, false);
+
+    search.on('input', drawWhiskies);
 
     $('.toggle-sort').click((e) => {
-
-        renderWhiskyList(e.target.id == "sort-name", $(e.target).hasClass('asc'));
-        $(e.target).toggleClass('asc');
+        e.preventDefault();
+        var link = $(e.currentTarget);
+        renderWhiskyList(link.attr('id') == "sort-name", link.hasClass('asc'));
+        link.toggleClass('asc');
     });
     
     window.data = events;
@@ -135,7 +142,7 @@ Promise.all([readSheet('Whisky'), readSheet('Events')])
     $('#next-event-data').text('Could not load the club data - try again later.');
 });
 
-var page = '#next-event';
+var page = '#whisky-list';
 $('.nav-link').click(l => {
     $(page).hide();
     $(l.target.hash).show();
